@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registro", "Registro\Registro.csproj", "{AB5BC190-9931-4980-862E-A5787C29FD0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB5BC190-9931-4980-862E-A5787C29FD0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB5BC190-9931-4980-862E-A5787C29FD0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB5BC190-9931-4980-862E-A5787C29FD0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB5BC190-9931-4980-862E-A5787C29FD0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C29E0772-4F22-46FE-B79E-08AC4FF5469E}
+	EndGlobalSection
+EndGlobal
