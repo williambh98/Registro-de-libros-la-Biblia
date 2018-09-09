@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Registro
+namespace Registro.UI.Consultas
 {
-    public partial class Form1 : Form
+    public partial class Consultas : Form
     {
-        public Form1()
+        public Consultas()
         {
             InitializeComponent();
         }
