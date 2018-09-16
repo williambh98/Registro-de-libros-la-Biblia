@@ -27,5 +27,21 @@ namespace Registro
         {
 
         }
+
+        private void librosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new Registro.UI.Consultas.Consultas().Show();
+
+        }
+
+        private void registroToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

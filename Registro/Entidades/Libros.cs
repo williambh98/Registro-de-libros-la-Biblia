@@ -25,5 +25,13 @@ namespace Registro.Entidades
             Tipolb = string.Empty;
            // FechaCreacion = DateTime.Now;
         }
+
+        public Libros(int libroid, string descripcion, string siglas, string tipolb)
+        {
+            LibroId = libroid;
+            Descripcion = descripcion;
+            Siglas = siglas;
+            Tipolb = tipolb;
+        }
     }
 }

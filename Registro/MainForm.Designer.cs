@@ -56,11 +56,12 @@
             this.registroToolStripMenuItem1.Name = "registroToolStripMenuItem1";
             this.registroToolStripMenuItem1.Size = new System.Drawing.Size(76, 24);
             this.registroToolStripMenuItem1.Text = "Registro";
+            this.registroToolStripMenuItem1.Click += new System.EventHandler(this.registroToolStripMenuItem1_Click);
             // 
             // registroToolStripMenuItem2
             // 
             this.registroToolStripMenuItem2.Name = "registroToolStripMenuItem2";
-            this.registroToolStripMenuItem2.Size = new System.Drawing.Size(173, 26);
+            this.registroToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
             this.registroToolStripMenuItem2.Text = "RegistroLibro";
             this.registroToolStripMenuItem2.Click += new System.EventHandler(this.registroToolStripMenuItem2_Click);
             // 
@@ -71,12 +72,14 @@
             this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
             this.consultasToolStripMenuItem.Size = new System.Drawing.Size(84, 24);
             this.consultasToolStripMenuItem.Text = "Consultas";
+            this.consultasToolStripMenuItem.Click += new System.EventHandler(this.consultasToolStripMenuItem_Click);
             // 
             // librosToolStripMenuItem1
             // 
             this.librosToolStripMenuItem1.Name = "librosToolStripMenuItem1";
             this.librosToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
             this.librosToolStripMenuItem1.Text = "ConsultaLibros";
+            this.librosToolStripMenuItem1.Click += new System.EventHandler(this.librosToolStripMenuItem1_Click);
             // 
             // MainForm
             // 

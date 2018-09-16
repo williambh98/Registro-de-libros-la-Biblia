@@ -12,10 +12,7 @@ namespace Registro.BLL
 {
     //En esta calse se programa la logica del negocios
     public class LibrosBLL
-    {
-        private const EntityState modified = EntityState.Modified;
-
-        public static object Contexto { get; private set; }
+    {     
         //Guardar Entidad en la base de Datos
         public static bool Guardar(Libros libro)
         {
@@ -46,11 +43,8 @@ namespace Registro.BLL
             Contexto contexto = new Contexto();
             try
             {
-                contexto.Entry(Libro).State = modified;
-                if(contexto.SaveChanges() > 0)
-                {
-                    paso = true;
-                }
+                contexto.Entry(Libro).State = System.Data.Entity.EntityState.Modified;
+                paso = (contexto.SaveChanges() > 0);
                 contexto.Dispose();
             }
             catch(Exception)
@@ -67,15 +61,10 @@ namespace Registro.BLL
             Contexto contexto = new Contexto();
             try
             {
-                Libros libro = contexto.Librosbl.Find(id);
-                contexto.Librosbl.Remove(libro);
-
-                if(contexto.SaveChanges() >0)
-                {
-                    paso = true;
-                }
+                var eliminar = contexto.Librosbl.Find(id);
+                contexto.Entry(eliminar).State = System.Data.Entity.EntityState.Deleted;
+                paso = (contexto.SaveChanges() > 0);
                 contexto.Dispose();
-
             }
             catch(Exception)
             {
@@ -84,6 +73,8 @@ namespace Registro.BLL
             return paso;
 
         }
+
+        //Metodo para buscar en la base de datos
         public static Libros Buscar(int id)
         {
             Contexto contexto = new Contexto();
@@ -100,6 +91,8 @@ namespace Registro.BLL
             }
             return libro;
         }
+
+       //metodo para listar o consultar lo que tenemos en la base de datos
         public static List <Libros> GetList(Expression<Func<Libros, bool>> expression)
         {
             List<Libros> Libros = new List<Libros>();

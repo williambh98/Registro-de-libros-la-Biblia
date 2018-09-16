@@ -14,12 +14,25 @@ namespace Registro.UI.Consultas
 {
     public partial class Registro : Form
     {
-        public object SuperErrorProvider { get; private set; }
-
         public Registro()
         {
             InitializeComponent();
         }
+
+        private void Limpiar()
+        {
+            IDLibronumericUpDown.Value = 0;
+            string.IsNullOrWhiteSpace(textBoxDescripcion.Text);
+            textBoxSiglas.Text = string.Empty;
+            textBoxTiposLibro.Text = string.Empty;
+            errorProvider.Clear();
+        }
+        //Evento del boton nuevo en el que limpiamos los componentes del registro
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+        }
+
         private Libros LlenarClase()
         {
             Libros libros = new Libros();
@@ -29,24 +42,7 @@ namespace Registro.UI.Consultas
             libros.Tipolb = textBoxTiposLibro.Text;
 
             return libros;
-
         }
-
-        private void Limpiar()
-        {
-            IDLibronumericUpDown.Value = 0;
-              string.IsNullOrWhiteSpace(textBoxDescripcion.Text);
-            textBoxSiglas.Text = string.Empty;
-            textBoxTiposLibro.Text = string.Empty;
-
-        }
-        //Evento del boton nuevo en el que limpiamos los componentes del registro
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Limpiar();
-        }
-
-
 
         //Llenar campo
         private void LlenarCampo(Libros libros)
@@ -57,73 +53,47 @@ namespace Registro.UI.Consultas
             textBoxTiposLibro.Text = libros.Tipolb;
 
         }
-        private bool ExisteEnLaBaseDeDatos()
-        {
-            Libros libros = LibrosBLL.Buscar((int)IDLibronumericUpDown.Value);
-            return (libros!= null);
-        }
+   
 
         private bool GuardarValidar()
         {
+            errorProvider.Clear();
             bool paso = true;
 
-            if( string.IsNullOrWhiteSpace(textBoxDescripcion.Text) || string.IsNullOrWhiteSpace(textBoxSiglas.Text) || string.IsNullOrWhiteSpace(textBoxTiposLibro.Text))
-            {
+            //if( string.IsNullOrWhiteSpace(textBoxDescripcion.Text) || string.IsNullOrWhiteSpace(textBoxSiglas.Text) || string.IsNullOrWhiteSpace(textBoxTiposLibro.Text))
+           // {
                 if (string.IsNullOrWhiteSpace(textBoxDescripcion.Text))
-                {
+                  {
                     errorProvider.SetError(textBoxDescripcion, "Ingrese Descricion");
-                    //MessageBox.Show("No se puede dejar este campo vacio", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBoxDescripcion.Focus();
+                    paso = false;
 
-                }
+                  }
                 if (string.IsNullOrWhiteSpace(textBoxSiglas.Text))
-                {
+                  {
                      errorProvider.SetError(textBoxSiglas, "Ingrese Siglas");
-                    // MessageBox.Show("No se puede dejar este campo vacio", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBoxSiglas.Focus();
-                }
+                     paso = false;
+                  }
                 if (string.IsNullOrWhiteSpace(textBoxTiposLibro.Text))
-                {
+                 {
                      errorProvider.SetError(textBoxTiposLibro, "Ingrese Tipos de libros");
-                    // MessageBox.Show("No se puede dejar este campo vacio", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBoxTiposLibro.Focus();
-                }
-                paso = false;
-            }
+                   
+                   paso = false;
+                  }  
+             
             return paso;
         }
+
+        private bool ExisteEnLaBaseDeDatos()
+        {
+            Libros libros = LibrosBLL.Buscar((int)IDLibronumericUpDown.Value);
+            return (libros != null);
+        }
+
         private void Guardarbutton_Click_1(object sender, EventArgs e)
         {
             
             errorProvider.Clear();
-            
-            int id;
-            int.TryParse(IDLibronumericUpDown.Text, out id);
-            Libros libros = LibrosBLL.Buscar(id);
-            Libros libros_guardad = LlenarClase();
-
-            if(libros == null)
-            {
-                if(GuardarValidar())
-                {
-                    if (LibrosBLL.Guardar(libros_guardad))
-                        MessageBox.Show("Libros Guardado");
-                    else
-                        MessageBox.Show("LIbros no Guaedado");
-                }
-            }
-            else
-            {
-                if(GuardarValidar())
-                {
-                    if (LibrosBLL.Modificar(libros_guardad))
-                        MessageBox.Show("Libros modificado");
-                    else
-                        MessageBox.Show("Libros no modificado");
-                }
-            }
-            /*
-           
+        
             Libros libros;
             bool paso = false;
 
@@ -145,15 +115,16 @@ namespace Registro.UI.Consultas
                 paso = LibrosBLL.Modificar(libros);
              }
 
-            Limpiar();
+           
             if (paso)
             {
                
                 MessageBox.Show("Guardado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Limpiar();
             }
             else
                 MessageBox.Show("No se puede guardar", "Fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            */
+            
                 
         }
 
@@ -168,13 +139,15 @@ namespace Registro.UI.Consultas
 
             if (libros != null)
             {
-                MessageBox.Show("Libros Encotrado");
+                
+                MessageBox.Show("Libros Encotrado","Existo",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 LlenarCampo(libros);
             }
 
             else
             {
-                MessageBox.Show("Libros no Encontrada");
+                MessageBox.Show("Libros no Encontrada", "Fallo",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Limpiar();
             }
 
         }
@@ -185,14 +158,23 @@ namespace Registro.UI.Consultas
             int id;
             int.TryParse(IDLibronumericUpDown.Text, out id);
 
-            if (LibrosBLL.Eliminar(id))
+            if (!ExisteEnLaBaseDeDatos())
+            {
+                errorProvider.SetError(IDLibronumericUpDown, "No se puede eliminar una persona que no existe");
+                return;
+            }
+            if(LibrosBLL.Eliminar(id))
+            {
+                Limpiar();
                 MessageBox.Show("Eliminado");
-            else
-                errorProvider.SetError(IDLibronumericUpDown, "No se puede eliminar no existe");
+            }
 
         }
 
+        private void Registro_Load(object sender, EventArgs e)
+        {
 
+        }
     }  
    
 }

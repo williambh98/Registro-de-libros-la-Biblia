@@ -88,10 +88,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Consultas\Consultas.resx">
+      <DependentUpon>Consultas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Registros\Registro.resx">
       <DependentUpon>Registro.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Registro.Entidades.Libros.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,7 +115,6 @@
     <Folder Include="UI\Registros\Reportes\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DAL\Scripts\Librosbl.sql" />
     <None Include="Resources\icons8-nuevo-48.png" />
     <None Include="Resources\Eliminar.png" />
     <None Include="Resources\icons8-editar-propiedad-filled-50.png" />
@@ -119,6 +122,9 @@
     <None Include="Resources\Buscar.png" />
     <None Include="Resources\New.png" />
     <None Include="Resources\icons8-ver-archivo-filled-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DAL\Scripts\Librosbl.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
